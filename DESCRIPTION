@@ -1,9 +1,14 @@
 Package: flavin
-Version: 0.0.1-alpha
-Date: 2016-11-29
-Title: FLAVIN is a Library for Automated Validation of INteractions
-Description: FLAVIN is an R package for validating the biological significance of protein-protein interactions
-Author: Michael A Skinnider <michaelskinnider@gmail.com>
-Maintainer: Michael A Skinnider <michaelskinnider@gmail.com>
-Imports: data.table,
-    ggplot2
+Title: A fast library for automated validation of interaction networks
+Version: 0.0.0.9000
+Authors@R: person("Michael", "Skinnider", email = "michaelskinnider@gmail.com", role = c("aut", "cre"))
+Description: Flavin provides fast methods for automated validation of interaction networks. 
+Depends: R (>= 3.4.0)
+Imports: 
+	ontologyIndex (>= 2.4),
+	AnnotationDbi (>= 1.38.0),
+	Matrix (>= 1.2.10)
+License: MIT
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 6.0.1
