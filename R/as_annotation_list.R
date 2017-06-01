@@ -19,7 +19,5 @@
 as_annotation_list <- function(annotations, termCol, keyCol) {
   message("aggregating annotations to the same source node ...")
   annList <- unstack(annotations[, c(termCol, keyCol)])
-  ann <- sapply(annList$x, function(x) unique(x))
-  names(ann) <- annList[,1]
-  return(ann)
+  sapply(annList, function(x) unique(x))
 }
