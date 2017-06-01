@@ -34,7 +34,7 @@ proteome_shared_go <- function(gpa.file,
                       min.breadth = 20, max.breadth = 1000, 
                       ontology.file = NULL, ontology = c("BP", "CC", "MF")) {
   # read GPA file 
-  goa <- read_gpa(gpa.file, accession, database, filter.NOT, filter.evidence)
+  goa <- read_gpa(gpa.file, database, accession, filter.NOT, filter.evidence)
   
   # filter based on term breadth
   if (filter.breadth) {
