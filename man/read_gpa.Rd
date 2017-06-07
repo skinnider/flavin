@@ -5,7 +5,8 @@
 \title{Read a GO annotation file in GPA format.}
 \usage{
 read_gpa(filepath, database = NULL, accession = "UNIPROT", filter.NOT = T,
-  filter.evidence = c("ND", "IPI", "IEA", "NAS"))
+  filter.evidence = c("ND", "IPI", "IEA", "NAS"), ontology.file = NULL,
+  propagate = T)
 }
 \arguments{
 \item{filepath}{the location of the GPA file. Files can be downloaded from
@@ -22,6 +23,9 @@ database.}
 
 \item{filter_evidence}{optionally, specify evidence codes to filter. By 
 default, evidence codes ND, IPI, IEA and NAS are filtered.}
+
+\item{propatate}{if true, and an ontology file is provided, all ancestors of 
+a given term are associated with each protein.}
 }
 \value{
 a data.frame containing the filtered GPA file
