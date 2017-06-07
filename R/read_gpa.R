@@ -52,7 +52,7 @@ read_gpa <- function(filepath,
     goa$UNIPROT <- goa$DB_Object_ID
   }
   # read the ontology
-  if (ontology.file != NULL & propagate) {
+  if (!is.null(ontology.file) & propagate) {
     ontology <- ontologyIndex::get_ontology(ontology.file, 
                                             extract_tags = "minimal")
     goa$ancestors <- ontology$ancestors[goa$GO.ID]
