@@ -56,7 +56,7 @@ read_gpa <- function(filepath,
     ontology <- ontologyIndex::get_ontology(ontology.file, 
                                             extract_tags = "minimal")
     goa$ancestors <- ontology$ancestors[goa$GO.ID]
-    goa <- unnest(goa, ancestors)
+    goa <- tidyr::unnest(goa, ancestors)
     # replace column
     goa[["GO.ID"]] <- goa[["ancestors"]]
     goa <- goa[, -ncol(goa)]
