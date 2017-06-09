@@ -3,7 +3,7 @@ Title: A fast library for automated validation of interaction networks
 Version: 0.0.0.9000
 Authors@R: person("Michael", "Skinnider", email = "michaelskinnider@gmail.com", role = c("aut", "cre"))
 Description: Flavin provides fast methods for automated validation of interaction networks. 
-Depends: R (>= 3.4.0)
+Depends: R (>= 3.2.3)
 Imports: 
 	ontologyIndex (>= 2.4),
 	AnnotationDbi (>= 1.38.0),
