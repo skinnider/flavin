@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_gpa.R
 \name{read_gpa}
 \alias{read_gpa}
-\title{Read a GO annotation file in GPA format.}
+\title{Read a GPA file}
 \usage{
 read_gpa(filepath, database = NULL, accession = "UNIPROT", filter.NOT = T,
   filter.evidence = c("ND", "IPI", "IEA", "NAS"), ontology.file = NULL,
@@ -31,7 +31,10 @@ a given term are associated with each protein.}
 a data.frame containing the filtered GPA file
 }
 \description{
-Read a GO annotation file in GPA format.
+Read a GO annotation file in GPA format. Further information about the GPA
+format is available from the \href{
+http://geneontology.org/page/gene-product-association-data-gpad-format}{
+Gene Ontology Consortium}.
 }
 \examples{
 # read human GOA and map to Ensembl, filtering IEA annotations

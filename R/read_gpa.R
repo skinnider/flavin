@@ -1,4 +1,9 @@
-#' Read a GO annotation file in GPA format. 
+#' Read a GPA file
+#' 
+#' Read a GO annotation file in GPA format. Further information about the GPA
+#' format is available from the \href{
+#' http://geneontology.org/page/gene-product-association-data-gpad-format}{
+#' Gene Ontology Consortium}. 
 #' 
 #' @param filepath the location of the GPA file. Files can be downloaded from
 #' ftp://ftp.ebi.ac.uk/pub/databases/GO/goa/
@@ -56,6 +61,8 @@ read_gpa <- function(filepath,
     ontology <- ontologyIndex::get_ontology(ontology.file, 
                                             extract_tags = "minimal")
     goa$ancestors <- ontology$ancestors[goa$GO.ID]
+    # filter out terms missing ancestors (deprecated)
+    goa <- goa[lengths(goa$ancestors) > 0,]
     goa <- tidyr::unnest(goa, ancestors)
     # replace column
     goa[["GO.ID"]] <- goa[["ancestors"]]
