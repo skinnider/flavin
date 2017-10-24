@@ -15,7 +15,7 @@
 #' @param filter_NOT if true, filter annotations with the qualifier NOT
 #' @param filter_evidence optionally, specify evidence codes to filter. By 
 #' default, evidence codes ND, IPI, IEA and NAS are filtered. 
-#' @param propatate if true, and an ontology file is provided, all ancestors of 
+#' @param propagate if true, and an ontology file is provided, all ancestors of 
 #' a given term are associated with each protein.
 #' @return a data.frame containing the filtered GAF file  
 #' @export
@@ -38,7 +38,8 @@ read_gaf <- function(filepath,
                     "Aspect", "DB_Object_Name", "DB_Object_Synonym",
                     "DB_Object_Type", "Taxon", "Date", "Assigned_By", 
                     "Annotation_Extension", "Gene_Product_Form_ID")
-  goa <- readr::read_tsv(filepath, comment = "!", col_names = gaf.colnames)
+  goa <- suppressMessages(
+    readr::read_tsv(filepath, comment = "!", col_names = gaf.colnames))
   # optionally, filter annotations with the qualifier NOT
   if (filter.NOT) 
     goa <- goa[!grepl("NOT", goa$Qualifier),]
@@ -61,6 +62,8 @@ read_gaf <- function(filepath,
     if (!"ontology_index" %in% class(ontology))
       stop("Ontology must be of class ontology_index")
     goa$ancestors <- ontology$ancestors[goa$GO_ID]
+    # filter out terms missing ancestors (deprecated)
+    goa <- goa[lengths(goa$ancestors) > 0,]
     goa <- tidyr::unnest(goa, ancestors)
     # replace column
     goa[["GO_ID"]] <- goa[["ancestors"]]
