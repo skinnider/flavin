@@ -19,13 +19,13 @@ to map identifiers from UniProt to some other accession}
 to using a Bioconductor `AnnotationDbi` database. Must be a keytype in the
 database.}
 
+\item{propagate}{if true, and an ontology file is provided, all ancestors of 
+a given term are associated with each protein.}
+
 \item{filter_NOT}{if true, filter annotations with the qualifier NOT}
 
 \item{filter_evidence}{optionally, specify evidence codes to filter. By 
 default, evidence codes ND, IPI, IEA and NAS are filtered.}
-
-\item{propatate}{if true, and an ontology file is provided, all ancestors of 
-a given term are associated with each protein.}
 }
 \value{
 a data.frame containing the filtered GAF file
