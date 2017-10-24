@@ -8,7 +8,8 @@ Imports:
 	ontologyIndex (>= 2.4),
 	AnnotationDbi (>= 1.38.0),
 	Matrix (>= 1.2.10),
-	tidyr (>= 0.6.3)
+	tidyr (>= 0.6.3),
+	readr (>= 1.1.1)
 License: MIT
 Encoding: UTF-8
 LazyData: true
