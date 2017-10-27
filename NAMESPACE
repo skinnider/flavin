@@ -3,6 +3,6 @@
 export(as_annotation_list)
 export(filter_breadth)
 export(filter_roots)
-export(network_shared_go)
+export(network_shared_annotations)
 export(read_gaf)
 export(read_gpa)
