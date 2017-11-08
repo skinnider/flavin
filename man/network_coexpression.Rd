@@ -2,7 +2,7 @@
 % Please edit documentation in R/network_coexpression.R
 \name{network_coexpression}
 \alias{network_coexpression}
-\title{Calculate enrichment for coexpression among interacting proteins}
+\title{Calculate the coexpression of each pair of genes or proteins in a network}
 \usage{
 network_coexpression(network, expr, ...)
 }
@@ -10,17 +10,18 @@ network_coexpression(network, expr, ...)
 \item{network}{a matrix or data frame, with nodes (genes) in the first 
 two columns}
 
-\item{expr}{mRNA or protein expression data for}
+\item{expr}{a matrix containing mRNA or protein expression data, with 
+genes as columns}
 
 \item{...}{further arguments passed directly to the cor function, such as
 coefficient (e.g., Pearson or Spearman)}
 }
 \value{
-the difference in medians between interacting and random protein 
-pairs
+the input network, with an extra column containing the 
+coexpression of each interacting gene or protein pair
 }
 \description{
-This function calculates the difference between the median coexpression 
-of interacting protein pairs within a network, and random pairs from the same 
-expression matrix.
+Calculate the mRNA or protein coexpression of each pair of genes or 
+proteins in a network, and append this value to the input data frame
+as an extra column.
 }
