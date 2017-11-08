@@ -10,6 +10,7 @@
 #' @param ann a list of annotations, as described above
 #' @return a sparse matrix containing the total number of shared annotations
 #' between each unique gene or protein pair
+#' @export
 shared_annotations <- function(ann) {
   Matrix::crossprod(xtabs( ~ values + ind, utils::stack(ann), sparse = T))
 }

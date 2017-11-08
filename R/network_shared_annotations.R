@@ -20,7 +20,7 @@ network_shared_annotations <- function(network, shared, keep.all = F) {
   inSharedIndices <- network[,1] %in% rownames(shared) & 
     network[,2] %in% rownames(shared)
   if (sum(inSharedIndices) == 0)
-    stop("no nodes in the network were found in the shared GO terms matrix")
+    stop("no nodes in the network were found in the shared annotations matrix")
   in.shared <- network[inSharedIndices,]
   rowIndices <- match(in.shared[,1], rownames(shared))
   colIndices <- match(in.shared[,2], colnames(shared))
