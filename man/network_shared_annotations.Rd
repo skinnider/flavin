@@ -2,10 +2,9 @@
 % Please edit documentation in R/network_shared_annotations.R
 \name{network_shared_annotations}
 \alias{network_shared_annotations}
-\title{Calculate the number of shared annotations between each pair of genes or 
-proteins in a network.}
+\title{Calculate shared annotations between network nodes}
 \usage{
-network_shared_annotations(network, shared, keep.all = F)
+network_shared_annotations(network, shared, col_name = "shared")
 }
 \arguments{
 \item{network}{a data.frame with nodes (genes) in the first two columns}
@@ -13,8 +12,7 @@ network_shared_annotations(network, shared, keep.all = F)
 \item{shared}{a matrix containing the number of shared annotations, e.g. 
 GO terms, between each pair of proteins (as output by `shared_annotations`)}
 
-\item{keep.all}{if false, only results for network edges where both nodes
-were found in the shared annotations matrix will be reported}
+\item{col_name}{the name of the new column to create; defaults to "coexpr"}
 }
 \value{
 the input network, with an extra column containing the number of 
@@ -22,7 +20,8 @@ shared annotations (e.g., GO terms)
 }
 \description{
 Calculate the number of shared annotations between each pair of genes or 
-proteins in a network.
+proteins in a network, and append this value to the input data frame
+as an extra column.
 }
 \examples{
 # read network
