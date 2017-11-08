@@ -8,6 +8,7 @@
 #' two columns
 #' @param expr a matrix containing mRNA or protein expression data, with 
 #' genes as columns
+#' @param col_name the name of the new column to create; defaults to "coexpr"
 #' @param ... further arguments passed directly to the cor function, such as
 #' coefficient (e.g., Pearson or Spearman)
 #' 
@@ -15,7 +16,7 @@
 #' coexpression of each interacting gene or protein pair
 #' 
 #' @export
-network_coexpression <- function(network, expr, ...) {
+network_coexpression <- function(network, expr, col_name = "coexpr", ...) {
   # make sure there is some overlap between network and expression data  
   exprGenes <- colnames(expr)
   overlap <- network[,1] %in% exprGenes & network[,2] %in% exprGenes
@@ -28,7 +29,7 @@ network_coexpression <- function(network, expr, ...) {
   expr <- expr[, genes %in% networkGenes]
   coexpr <- cor(expr, ...)
   # find network edges in coexpression matrix
-  network$coexpr <- NA
-  network$coexpr[overlap] <- coexpr[cbind(subset[,1], subset[,2])]
+  network[[col_name]] <- NA
+  network[[col_name]][overlap] <- coexpr[cbind(subset[,1], subset[,2])]
   return(network)
 }

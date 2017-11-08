@@ -2,9 +2,9 @@
 % Please edit documentation in R/network_coexpression.R
 \name{network_coexpression}
 \alias{network_coexpression}
-\title{Calculate the coexpression of each pair of genes or proteins in a network}
+\title{Calculate coexpression of network nodes}
 \usage{
-network_coexpression(network, expr, ...)
+network_coexpression(network, expr, col_name = "coexpr", ...)
 }
 \arguments{
 \item{network}{a matrix or data frame, with nodes (genes) in the first 
@@ -12,6 +12,8 @@ two columns}
 
 \item{expr}{a matrix containing mRNA or protein expression data, with 
 genes as columns}
+
+\item{col_name}{the name of the new column to create; defaults to "coexpr"}
 
 \item{...}{further arguments passed directly to the cor function, such as
 coefficient (e.g., Pearson or Spearman)}
