@@ -26,7 +26,7 @@ network_coexpression <- function(network, expr, col_name = "coexpr", ...) {
   subset <- network[overlap,]
   networkGenes <- unique(c(subset[, 1], subset[, 2]))
   # calculate full coexpression matrix
-  expr <- expr[, genes %in% networkGenes]
+  expr <- expr[, exprGenes %in% networkGenes]
   coexpr <- cor(expr, ...)
   # find network edges in coexpression matrix
   network[[col_name]] <- NA
