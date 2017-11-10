@@ -25,11 +25,12 @@ shared_pairwise_annotations <- function(annotations,
     unstack()
   if (length(unlist(annotations)) == 0)
     stop("no annotations were found in the pairwise annotation matrix")
+  # also sort and remove any paired annotations not found in annotation list
+  annotation_pairs <- annotation_pairs[unique(unlist(annotations)),
+                                       unique(unlist(annotations))]
   # calculate shared pairwise annotations
-  n <- length(annotations)
-  shared <- matrix(nrow = n, ncol = n)
-  grid <- expand.grid(annotations, annotations)
-  shared[] <- purrr::pmap_dbl(grid, ~ sum(annotation_pairs[.x, .y])) 
-  colnames(shared) <- rownames(shared) <- names(annotations)
+  ann_table <- table(rev(stack(annotations)))[
+    names(annotations), colnames(annotation_pairs)]
+  shared <- tcrossprod(tcrossprod(ann_table, annotation_pairs), ann_table)
   return(shared)
 }
