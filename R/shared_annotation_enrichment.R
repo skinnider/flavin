@@ -21,16 +21,16 @@
 shared_annotation_enrichment <- function(network, shared, bootstraps = 100,
                                          seed = 0, colname = "shared") {
   # calculate observed shared annotations
-  subset <- network_shared_annotations(subset, shared, col_name = colname)
-  obs <- mean(subset[[colname]], na.rm = T)
+  network <- network_shared_annotations(network, shared, col_name = colname)
+  obs <- mean(network[[colname]], na.rm = T)
   
   # convert network to graph
   g <- igraph::graph_from_data_frame(network, directed = F)
   m <- length(igraph::E(g))
-  iter <- 6.9077 * m ## from https://arxiv.org/pdf/1202.3473.pdf
+  n_iterations <- 6.9077 * m ## from https://arxiv.org/pdf/1202.3473.pdf
   set.seed(seed) ## set seed for reproducibility
   rewires <- map(seq_len(bootstraps), ~ igraph::rewire(
-    g, with = igraph::keeping_degseq(niter = iter)))
+    g, with = igraph::keeping_degseq(niter = n_iterations)))
   rnd_shared <- map(rewires, ~ network_shared_annotations(
     igraph::as_data_frame(.), shared))
   rnds <-purrr:: map(rnd_shared, colname)
@@ -43,7 +43,6 @@ shared_annotation_enrichment <- function(network, shared, bootstraps = 100,
   results <- list(
     observed = obs,
     rewired = rnd,
-    Z = Z
-  )
+    Z = Z)
   return(results)
 } 
