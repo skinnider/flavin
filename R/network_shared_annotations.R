@@ -23,16 +23,16 @@
 #' net.shared <- network_shared_go(net, shared)
 network_shared_annotations <- function(network, shared, col_name = "shared") {
   # make sure there is some overlap between network and expression data
-  inSharedIndices <- network[,1] %in% rownames(shared) & 
-    network[,2] %in% rownames(shared)
+  inSharedIndices <- network[[1]] %in% rownames(shared) & 
+    network[[2]] %in% rownames(shared)
   if (sum(inSharedIndices) == 0)
     stop("no nodes in the network were found in the shared annotations matrix")
   # create empty column
   network[[col_name]] <- NA
   # add values for nodes in shared matrix
   in.shared <- network[inSharedIndices,]
-  rowIndices <- match(in.shared[,1], rownames(shared))
-  colIndices <- match(in.shared[,2], colnames(shared))
+  rowIndices <- match(in.shared[[1]], rownames(shared))
+  colIndices <- match(in.shared[[2]], colnames(shared))
   network[[col_name]][inSharedIndices] <- shared[cbind(rowIndices, colIndices)]
   return(network)
 }
