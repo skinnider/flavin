@@ -22,7 +22,7 @@ shared_annotation_enrichment <- function(network, shared, bootstraps = 100,
                                          seed = 0, colname = "shared") {
   # calculate observed shared annotations
   network <- network_shared_annotations(network, shared, col_name = colname)
-  obs <- mean(network[[colname]], na.rm = T)
+  obs <- mean(network[[colname]] > 0, na.rm = T)
   
   # convert network to graph
   g <- igraph::graph_from_data_frame(network, directed = F)
@@ -34,7 +34,7 @@ shared_annotation_enrichment <- function(network, shared, bootstraps = 100,
   rnd_shared <- map(rewires, ~ network_shared_annotations(
     igraph::as_data_frame(.), shared))
   rnds <-purrr:: map(rnd_shared, colname)
-  rnd <- purrr::map_dbl(rnds, ~ mean(., na.rm = T))
+  rnd <- purrr::map_dbl(rnds, ~ mean(. > 0, na.rm = T))
   
   # calculate Z score
   Z <- (obs - mean(rnd)) / sd(rnd)
