@@ -23,6 +23,7 @@ shared_pairwise_annotations <- function(annotations,
     stack() %>%
     dplyr::filter(values %in% colnames(annotation_pairs)) %>%
     unstack()
+  annotations <- annotations[lengths(annotations) > 0]
   if (length(unlist(annotations)) == 0)
     stop("no annotations were found in the pairwise annotation matrix")
   # also sort and remove any paired annotations not found in annotation list
