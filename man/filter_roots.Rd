@@ -5,26 +5,21 @@
 \title{Filter GO terms from a particular ontological category (BP, CC, or MF) from 
 a GOA file.}
 \usage{
-filter_roots(goa, ontology.file, root = c("BP", "CC", "MF"))
+filter_roots(goa, ontology, root = c("BP", "CC", "MF"))
 }
 \arguments{
-\item{ontology.file}{location of the GO ontology file}
+\item{ontology}{the GO ontology, as read with the \code{ontologyIndex} 
+package}
 
 \item{root}{the ontological category to restrict the GOA file to; one of
 "BP", "CC", or "MF"}
 
-\item{go}{the GPA file, read with `read_gpa`}
+\item{go}{the GO annotation data frame}
 }
 \value{
-the filtered GPA file
+the filtered GO annotation file
 }
 \description{
 Filter GO terms from a particular ontological category (BP, CC, or MF) from 
 a GOA file.
-}
-\examples{
-# read a GOA file 
-go <- read_gpa("goa_human.gpa.gz")
-# get BP terms only
-bp <- filter_roots(go, ontology.file = "go-basic.obo.gz", root = "BP")
 }
