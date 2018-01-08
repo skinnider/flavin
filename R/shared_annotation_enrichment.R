@@ -31,9 +31,10 @@ shared_annotation_enrichment <- function(network, shared, bootstraps = 100,
   set.seed(seed) ## set seed for reproducibility
   rewires <- map(seq_len(bootstraps), ~ igraph::rewire(
     g, with = igraph::keeping_degseq(niter = n_iterations)))
-  rnd_shared <- map(rewires, ~ network_shared_annotations(
-    igraph::as_data_frame(.), shared))
-  rnds <-purrr:: map(rnd_shared, colname)
+  rnd_shared <- map(rewires, ~ tryCatch(
+    network_shared_annotations(igraph::as_data_frame(.), shared),
+    error = function(e) return(0)))
+  rnds <- purrr::map(rnd_shared, colname)
   rnd <- purrr::map_dbl(rnds, ~ mean(. > 0, na.rm = T))
   
   # calculate Z score

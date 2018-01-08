@@ -31,8 +31,9 @@ coexpression_enrichment <- function(network, expr, bootstraps = 100,
   set.seed(seed) ## set seed for reproducibility
   rewires <- map(seq_len(bootstraps), ~ igraph::rewire(
     g, with = igraph::keeping_degseq(niter = n_iterations)))
-  rnd_shared <- map(rewires, ~ network_coexpression(
-    igraph::as_data_frame(.), expr))
+  rnd_shared <- map(rewires, ~ tryCatch(
+    network_coexpression(igraph::as_data_frame(.), expr),
+    error = function(e) return(NA)))
   rnds <- purrr:: map(rnd_shared, colname)
   rnd <- purrr::map_dbl(rnds, ~ median(., na.rm = T))
   
