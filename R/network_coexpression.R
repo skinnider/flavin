@@ -19,17 +19,17 @@
 network_coexpression <- function(network, expr, col_name = "coexpr", ...) {
   # make sure there is some overlap between network and expression data  
   exprGenes <- colnames(expr)
-  overlap <- network[,1] %in% exprGenes & network[,2] %in% exprGenes
+  overlap <- network[[1]] %in% exprGenes & network[[2]] %in% exprGenes
   if (sum(overlap) == 0)
     stop("no nodes in the network were found in the expression matrix")
   # get the network genes in the expression matrix, for faster calculations
   subset <- network[overlap,]
-  networkGenes <- unique(c(subset[, 1], subset[, 2]))
+  networkGenes <- unique(c(subset[[1]], subset[[2]]))
   # calculate full coexpression matrix
   expr <- expr[, exprGenes %in% networkGenes]
   coexpr <- cor(expr, ...)
   # find network edges in coexpression matrix
   network[[col_name]] <- NA
-  network[[col_name]][overlap] <- coexpr[cbind(subset[,1], subset[,2])]
+  network[[col_name]][overlap] <- coexpr[cbind(subset[[1]], subset[[2]])]
   return(network)
 }
