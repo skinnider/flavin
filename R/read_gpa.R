@@ -15,7 +15,7 @@
 #' @param filter_NOT if true, filter annotations with the qualifier NOT
 #' @param filter_evidence optionally, specify evidence codes to filter. By 
 #' default, evidence codes ND, IPI, IEA and NAS are filtered. 
-#' @param propatate if true, and an ontology file is provided, all ancestors of 
+#' @param propagate if true, and an ontology file is provided, all ancestors of 
 #' a given term are associated with each protein.
 #' @return a data.frame containing the filtered GPA file  
 #' @export
@@ -30,7 +30,7 @@ read_gpa <- function(filepath,
                      database = NULL, accession = "UNIPROT", 
                      filter.NOT = T, 
                      filter.evidence = c("ND", "IPI", "IEA", "NAS"),
-                     ontology.file = NULL, propagate = T) {
+                     ontology = NULL, propagate = T) {
   message("reading GOA file ", filepath, "...")
   # read GOA file 
   gpa.colnames <- c("DB", "DB_Object_ID", "Qualifier", "GO.ID", "DB.Reference",
@@ -57,9 +57,9 @@ read_gpa <- function(filepath,
     goa$UNIPROT <- goa$DB_Object_ID
   }
   # read the ontology
-  if (!is.null(ontology.file) & propagate) {
-    ontology <- ontologyIndex::get_ontology(ontology.file, 
-                                            extract_tags = "minimal")
+  if (!is.null(ontology) & propagate) {
+    if (!"ontology_index" %in% class(ontology))
+      stop("Ontology must be of class ontology_index")
     goa$ancestors <- ontology$ancestors[goa$GO.ID]
     # filter out terms missing ancestors (deprecated)
     goa <- goa[lengths(goa$ancestors) > 0,]
